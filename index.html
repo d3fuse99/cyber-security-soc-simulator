@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBER-SENTINEL SOC v9.0 | NETWORK ANALYTICS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="boot-screen">
+        <div class="boot-loader" id="boot-log"></div>
+        <button id="start-btn" onclick="startSystem()">START MONITORING</button>
+    </div>
+
+    <div class="soc-container" id="main-ui">
+        <header>
+            <div style="color: var(--neon-cyan); letter-spacing: 2px; font-weight: bold;">SENTINEL_SOC_v9.0</div>
+            <div id="sys-status" style="color: var(--neon-green);">SYSTEM_ONLINE</div>
+            <div id="clock">00:00:00</div>
+        </header>
+
+        <aside class="panel sidebar">
+            <div class="panel-header">Network Load Analytics</div>
+            <canvas id="load-chart"></canvas>
+            
+            <div class="panel-header">Threat Injection</div>
+            <div style="padding: 10px;">
+                <button class="btn" onclick="inject('BRUTEFORCE')">> Bruteforce</button>
+                <button class="btn" onclick="inject('SQLI')">> SQL Injection</button>
+                <button class="btn" onclick="inject('DDOS')">> DDoS Strike</button>
+                <button class="btn" onclick="inject('SCAN')">> Port Scan</button>
+            </div>
+            
+            <div class="panel-header">Operational Mode</div>
+            <div style="padding: 15px; color: var(--neon-green); font-size: 0.75rem; border-top: 1px solid var(--border);">
+                <input type="checkbox" id="auto-pilot" onchange="toggleAuto()"> AUTONOMOUS DEFENSE
+            </div>
+        </aside>
+
+        <section class="panel feed-panel">
+            <div class="panel-header">Global Attack Feed (Real-time)</div>
+            <div id="attack-feed"></div>
+        </section>
+
+        <section class="panel terminal-panel">
+            <div class="panel-header">Live Log Terminal</div>
+            <div id="log-stream"></div>
+        </section>
+
+        <aside class="panel stats-panel">
+            <div class="panel-header">Global Statistics</div>
+            <div class="stat-item"><span style="font-size:0.6rem; color:#445;">TOTAL INCIDENTS</span><span id="st-TOTAL" class="stat-val">0</span></div>
+            <div class="stat-item"><span style="font-size:0.6rem; color:#445;">BRUTEFORCE</span><span id="st-BRUTEFORCE" class="stat-val" style="color:var(--neon-red)">0</span></div>
+            <div class="stat-item"><span style="font-size:0.6rem; color:#445;">DDOS</span><span id="st-DDOS" class="stat-val" style="color:var(--neon-red)">0</span></div>
+            <div class="stat-item"><span style="font-size:0.6rem; color:#445;">SQLi</span><span id="st-SQLI" class="stat-val" style="color:var(--neon-red)">0</span></div>
+        </aside>
+
+        <section class="panel report-panel" style="grid-column: span 2;">
+            <div class="panel-header">Last Incident Analysis Report</div>
+            <div style="display: flex; padding: 20px; gap: 40px; font-size: 0.9rem;">
+                <div id="rep-box">
+                    TYPE: <span id="rp-type" style="color:var(--neon-red); font-weight: bold;">NONE</span><br>
+                    SOURCE IP: <span id="rp-ip" style="color: #fff;">--</span><br>
+                    LOCATION: <span id="rp-loc" style="color: #fff;">--</span>
+                </div>
+                <div>
+                    SYSTEM STATUS: <span id="rp-status" style="color: var(--neon-green);">MONITORING</span><br>
+                    THREAT SCORE: <span id="rp-score" style="color: var(--neon-yellow);">0</span>
+                </div>
+                <div style="border-left: 1px solid #222; padding-left: 20px; color: #556; font-size: 0.75rem;">
+                    [ENGINE] Neural heuristics: Active<br>
+                    [ENGINE] Packet scrubbing: On<br>
+                    [ENGINE] IP Reputation: Filtering
+                </div>
+            </div>
+        </section>
+
+        <section class="panel response-panel">
+            <div class="panel-header">Countermeasures Log</div>
+            <div id="event-log"></div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
